@@ -19,7 +19,7 @@
           viewBox="0 0 24 24"
           stroke-width="1.5"
           stroke="currentColor"
-          class="w-5 h-5 text-slate-800"
+          class="w-5 h-5 stroke-slate-800 cursor-pointer"
         >
           <path
             stroke-linecap="round"
@@ -100,17 +100,71 @@
           <img src="../apple-watch.png" />
         </div>
         <div class="flex items-center justify-between w-full mb-1.5">
-          <span class="text-slate-200 text-sm">apple</span>
-          <div class="flex items-center">
+          <span class="text-slate-300 text-sm">apple</span>
+          <div x-data="{ color: 'red' }" class="flex items-center">
             <div
-              class="bg-red-400 rounded-full w-6 h-6 curser-pointer border-2 border-white -mr-1.5"
-            ></div>
+              @click="color = 'red'"
+              :class=" color=== 'red' ? 'ring-2 ring-red-400' : ''"
+              class="bg-red-400 rounded-full flex items-center justify-center w-6 h-6 sm:w-8 sm:h-8 cursor-pointer border-2 border-white -mr-1.5"
+            >
+              <svg
+                x-show="color === 'red'"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="w-4 h-4 sm:w-5 sm:h-5 stroke-white"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M4.5 12.75l6 6 9-13.5"
+                />
+              </svg>
+            </div>
             <div
-              class="bg-blue-400 rounded-full w-6 h-6 curser-pointer border-2 border-white -mr-1.5"
-            ></div>
+              @click="color = 'blue'"
+              :class=" color=== 'blue' ? 'ring-2 ring-blue-400' : ''"
+              class="bg-blue-400 rounded-full flex items-center justify-center w-6 h-6 sm:w-8 sm:h-8 cursor-pointer border-2 border-white -mr-1.5"
+            >
+              <svg
+                x-show="color === 'blue'"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="w-4 h-4 sm:w-5 sm:h-5 stroke-white"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M4.5 12.75l6 6 9-13.5"
+                />
+              </svg>
+            </div>
             <div
-              class="bg-green-400 rounded-full w-6 h-6 curser-pointer border-2 border-white -mr-1.5"
-            ></div>
+              @click="color = 'green'"
+              :class=" color=== 'green' ? 'ring-2 ring-green-400' : ''"
+              class="bg-green-400 rounded-full flex items-center justify-center w-6 h-6 sm:w-8 sm:h-8 cursor-pointer border-2 border-white -mr-1.5"
+            >
+              <svg
+                x-show="color === 'green'"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="w-4 h-4 sm:w-5 sm:h-5 stroke-white"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M4.5 12.75l6 6 9-13.5"
+                />
+              </svg>
+            </div>
           </div>
         </div>
         <!-- produc title -->
@@ -118,7 +172,7 @@
           apple watch series 6
         </div>
         <!-- produc price -->
-        <div class="text-orange-600 font-medium text-sm mb-2 md:text-base">
+        <div class="text-orange-600 font-bold text-sm mb-2 md:text-base">
           538 $
         </div>
         <hr />
@@ -127,5 +181,9 @@
         </button>
       </div>
     </div>
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
+    ></script>
   </body>
 </html>
