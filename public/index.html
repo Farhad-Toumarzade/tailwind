@@ -9,7 +9,7 @@
   </head>
   <body class="bg-stone-200">
     <!-- Bar app -->
-    <div class="flex items-center justify-between mt-4 p-5 mb-3">
+    <div class="flex md:hidden items-center justify-between mt-4 p-5 mb-3">
       <div
         class="bg-white rounded-md shadow-sm w-6 h-6 flex items-center justify-center"
       >
@@ -46,8 +46,8 @@
         </svg>
       </div>
     </div>
-    <!-- sort bar -->
-    <div class="flex items-center justify-between px-5 gap-x-4 mb-9">
+    <!-- filter-sort bar mobile -->
+    <div class="flex md:hidden items-center justify-between px-5 gap-x-4 mb-9">
       <div
         class="rounded p-2 bg-gray-100 flex items-center justify-start w-full gap-x-2"
       >
@@ -91,9 +91,88 @@
         <span class="text-slate-800 font-medium text-sm">Most Popular</span>
       </div>
     </div>
-    <!-- section prodc -->
     <div
-      x-data="{ products: [
+      class="grid grid-cols-12 md:grid-rows-[55px_minmax(500px,_1fr)] md:gap-8"
+    >
+      <!-- sideBar -->
+      <div class="bg-white hidden md:block p-4 col-span-3 row-span-2">
+        side bar
+      </div>
+      <!-- sort Bar -->
+      <div class="hidden md:block p-4 col-span-9">
+        <div
+          x-data="{sort: 1, activeClass: 'text-slate-800 font-bolds'}"
+          class="bg-white px-4 flex items-center gap-x-4 text-gray-400 rounded-lg"
+        >
+          <div
+            class="bg-orange-100 flex items-center justify-center p-1 rounded-md"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="w-7 h-7 stroke-orange-500"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M3.75 6.75h16.5M3.75 12h16.5M12 17.25h8.25"
+              />
+            </svg>
+          </div>
+
+          <button
+            @click="sort=1"
+            :class="sort===1 ? activeClass : '' "
+            class="py-4 relative"
+          >
+            <span>Popular</span>
+            <span
+              x-show="sort===1"
+              class="w-2 h-2 rounded-full bg-orange-600 top-1 right-0 absolute"
+            ></span>
+          </button>
+          <button
+            @click="sort=2"
+            :class="sort===2 ? activeClass : '' "
+            class="py-4 relative"
+          >
+            <span>most rated</span>
+            <span
+              x-show="sort===2"
+              class="w-2 h-2 rounded-full bg-orange-600 top-1 right-0 absolute"
+            ></span>
+          </button>
+          <button
+            @click="sort=3"
+            :class="sort===3 ? activeClass : '' "
+            class="py-4 relative"
+          >
+            <span>most viwed</span>
+            <span
+              x-show="sort===3"
+              class="w-2 h-2 rounded-full bg-orange-600 top-1 right-0 absolute"
+            ></span>
+          </button>
+          <button
+            @click="sort=4"
+            :class="sort===4 ? activeClass : '' "
+            class="py-4 relative"
+          >
+            <span>text me</span>
+            <span
+              x-show="sort===4"
+              class="w-2 h-2 rounded-full bg-orange-600 top-1 right-0 absolute"
+            ></span>
+          </button>
+        </div>
+      </div>
+      <!-- section prodcs -->
+      <div class="col-span-12 md:col-span-9">
+        <div
+          x-data="{ products: [
       { id: 1, title: 'apple watch series 6', price: ' 538 $' },
       { id: 2, title: 'apple watch series 6', price: ' 538 $' },
       { id: 3, title: 'apple watch series 6', price: ' 538 $' },
@@ -101,102 +180,105 @@
       { id: 5, title: 'apple watch series 6', price: ' 538 $' },
       { id: 6, title: 'apple watch series 6', price: ' 538 $' },
   ]}"
-      class="grid grid-cols-2 mx-3 gap-x-2 gap-y-8 md:grid-cols-3 lg:grid-cols-4 px-2 sm:gap-x-4 md:gap-x-8 md:gap-y-10"
-    >
-      <!-- single product -->
-      <template x-for="product in products" :key="product.id">
-        <div class="bg-white rounded-xl p-2 shadow-md">
-          <div
-            class="mb-2 rounded-lg bg-gray-100 p-2 flex items-center justify-center"
-          >
-            <img src="../apple-watch.png" />
-          </div>
-          <div class="flex items-center justify-between w-full mb-1.5">
-            <span class="text-slate-300 text-sm">apple</span>
-            <div x-data="{ color: 'red' }" class="flex items-center">
+          class="grid grid-cols-2 mx-3 gap-x-2 gap-y-8 md:grid-cols-3 lg:grid-cols-4 px-2 md:p-0 sm:gap-x-4 md:gap-x-6 md:gap-y-8"
+        >
+          <!-- single product -->
+          <template x-for="product in products" :key="product.id">
+            <div class="bg-white rounded-xl p-2 shadow-md">
               <div
-                @click="color = 'red'"
-                :class=" color=== 'red' ? 'ring-2 ring-red-400' : ''"
-                class="bg-red-400 rounded-full flex items-center justify-center w-6 h-6 sm:w-8 sm:h-8 cursor-pointer border-2 border-white -mr-1.5"
+                class="mb-2 rounded-lg bg-gray-100 p-2 flex items-center justify-center"
               >
-                <svg
-                  x-show="color === 'red'"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke-width="1.5"
-                  stroke="currentColor"
-                  class="w-4 h-4 sm:w-5 sm:h-5 stroke-white"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M4.5 12.75l6 6 9-13.5"
-                  />
-                </svg>
+                <img src="../apple-watch.png" />
               </div>
+              <div class="flex items-center justify-between w-full mb-1.5">
+                <span class="text-slate-300 text-sm">apple</span>
+                <div x-data="{ color: 'red' }" class="flex items-center">
+                  <div
+                    @click="color = 'red'"
+                    :class=" color=== 'red' ? 'ring-2 ring-red-400' : ''"
+                    class="bg-red-400 rounded-full flex items-center justify-center w-6 h-6 sm:w-8 sm:h-8 cursor-pointer border-2 border-white -mr-1.5"
+                  >
+                    <svg
+                      x-show="color === 'red'"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke-width="1.5"
+                      stroke="currentColor"
+                      class="w-4 h-4 sm:w-5 sm:h-5 stroke-white"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M4.5 12.75l6 6 9-13.5"
+                      />
+                    </svg>
+                  </div>
+                  <div
+                    @click="color = 'blue'"
+                    :class=" color=== 'blue' ? 'ring-2 ring-blue-400' : ''"
+                    class="bg-blue-400 rounded-full flex items-center justify-center w-6 h-6 sm:w-8 sm:h-8 cursor-pointer border-2 border-white -mr-1.5"
+                  >
+                    <svg
+                      x-show="color === 'blue'"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke-width="1.5"
+                      stroke="currentColor"
+                      class="w-4 h-4 sm:w-5 sm:h-5 stroke-white"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M4.5 12.75l6 6 9-13.5"
+                      />
+                    </svg>
+                  </div>
+                  <div
+                    @click="color = 'green'"
+                    :class=" color=== 'green' ? 'ring-2 ring-green-400' : ''"
+                    class="bg-green-400 rounded-full flex items-center justify-center w-6 h-6 sm:w-8 sm:h-8 cursor-pointer border-2 border-white -mr-1.5"
+                  >
+                    <svg
+                      x-show="color === 'green'"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke-width="1.5"
+                      stroke="currentColor"
+                      class="w-4 h-4 sm:w-5 sm:h-5 stroke-white"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M4.5 12.75l6 6 9-13.5"
+                      />
+                    </svg>
+                  </div>
+                </div>
+              </div>
+              <!-- produc title -->
               <div
-                @click="color = 'blue'"
-                :class=" color=== 'blue' ? 'ring-2 ring-blue-400' : ''"
-                class="bg-blue-400 rounded-full flex items-center justify-center w-6 h-6 sm:w-8 sm:h-8 cursor-pointer border-2 border-white -mr-1.5"
-              >
-                <svg
-                  x-show="color === 'blue'"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke-width="1.5"
-                  stroke="currentColor"
-                  class="w-4 h-4 sm:w-5 sm:h-5 stroke-white"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M4.5 12.75l6 6 9-13.5"
-                  />
-                </svg>
-              </div>
+                x-text="product.title"
+                class="text-slate-800 text-xs font-bold mb-1.5 md:text-base sm:text-base"
+              ></div>
+              <!-- produc price -->
               <div
-                @click="color = 'green'"
-                :class=" color=== 'green' ? 'ring-2 ring-green-400' : ''"
-                class="bg-green-400 rounded-full flex items-center justify-center w-6 h-6 sm:w-8 sm:h-8 cursor-pointer border-2 border-white -mr-1.5"
+                x-text="product.price"
+                class="text-orange-600 font-bold text-sm mb-2 md:text-base sm:text-base"
+              ></div>
+              <hr />
+              <button
+                class="text-orange-500 text-sm font-bold w-full md:text-base"
               >
-                <svg
-                  x-show="color === 'green'"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke-width="1.5"
-                  stroke="currentColor"
-                  class="w-4 h-4 sm:w-5 sm:h-5 stroke-white"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M4.5 12.75l6 6 9-13.5"
-                  />
-                </svg>
-              </div>
+                View and Buy
+              </button>
             </div>
-          </div>
-          <!-- produc title -->
-          <div
-            x-text="product.title"
-            class="text-slate-800 text-xs font-bold mb-1.5 md:text-base"
-          ></div>
-          <!-- produc price -->
-          <div
-            x-text="product.price"
-            class="text-orange-600 font-bold text-sm mb-2 md:text-base"
-          ></div>
-          <hr />
-          <button class="text-orange-500 text-sm font-bold w-full md:text-base">
-            View and Buy
-          </button>
+          </template>
         </div>
-      </template>
+      </div>
     </div>
-
     <script
       defer
       src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
